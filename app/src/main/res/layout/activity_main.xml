@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Raw EEG"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.giftedcat.wavelib.view.WaveView
+        android:id="@+id/waveView1"
+        android:layout_width="390dp"
+        android:layout_height="212dp"
+        app:draw_mode="normal"
+        app:grid_visible="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        app:max_value="400"
+        app:wave_background="#000000"
+        app:wave_line_color="#ffff00"
+        app:wave_line_stroke_width="5"
+        app:wave_line_width="1"
+        />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="70dp"
+        android:text="Denoised EEG by Autoencoder"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewXName1" />
+
+    <com.giftedcat.wavelib.view.WaveView
+        android:id="@+id/waveView2"
+        android:layout_width="390dp"
+        android:layout_height="214dp"
+        app:grid_visible="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:max_value="3"
+        app:wave_background="#000000"
+        app:wave_line_color="#FF0000"
+        app:wave_line_stroke_width="5"
+        app:wave_line_width="20" />
+
+    <Button
+        android:id="@+id/testButton"
+        android:layout_width="148dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="132dp"
+        android:backgroundTint="#3F51B5"
+        android:onClick="setTestButton"
+        android:text="Start Test"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/runOnGPUButton" />
+
+    <TextView
+        android:id="@+id/textViewX1"
+        android:layout_width="384dp"
+        android:layout_height="20dp"
+        android:text="     1                           2                            3                             4   "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/waveView1" />
+
+    <TextView
+        android:id="@+id/textViewXName1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time/(s)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewX1" />
+
+    <TextView
+        android:id="@+id/textViewX2"
+        android:layout_width="384dp"
+        android:layout_height="20dp"
+        android:text="     1                           2                            3                             4   "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/waveView2" />
+
+    <TextView
+        android:id="@+id/textViewXName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time/(s)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewX2" />
+
+    <Button
+        android:id="@+id/runOnCPUButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="24dp"
+        android:onClick="setRunOnCPUButton"
+        android:text="Run CPU"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewX2" />
+
+    <Button
+        android:id="@+id/runOnGPUButton"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="60dp"
+        android:onClick="setRunOnGPUButton"
+        android:text="Run GPU"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/runOnCPUButton"
+        app:layout_constraintTop_toBottomOf="@+id/textViewX2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
