@@ -6,7 +6,7 @@ The trained TensorFlow model, and the converted TensorFlow-Lite model are also i
 
 The Android Studio project is in "android_app" branch.
 
-
+****
 Statements and instructions:
 ****
 1. The EEG datasets used in this work are publicly available, and published by other researchers, the source of the dataset is provided below:
