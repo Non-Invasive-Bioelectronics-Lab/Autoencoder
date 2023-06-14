@@ -21,6 +21,8 @@ Statements and instructions:
    
 ****
 2. The trained Autoencoder Model is saved into "saved_model" folder, after downloading the folder, set up the correct directory, and then in Python, run the following code to load the model:
+  
+For obtaining a better model performance, the input raw EEG data should be processed in the same as we did: resample EEG to 200~Hz, segment EEG into 4-second length, normalize the segment into (0,1) amplitude range, and then feed into the model. 
 ****
     #%% Load Model from local directory
     autoencoder = tf.keras.models.load_model('saved_model/Autoencoder_CNN_model_v4')
