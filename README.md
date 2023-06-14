@@ -28,7 +28,7 @@ Statements:
     autoencoder.summary()
 ****
     #%% Run the model by using your preprocessed EEG data
-    encoded_layer = autoencoder.encoder(x_test_noisy).numpy()        / x_test_noisy: your own preprocessed EEG data (the INPUT of the autoencoder model)
+    encoded_layer = autoencoder.encoder(x_test_noisy).numpy()        / x_test_noisy: your own preprocessed EEG data (the INPUT of the autoencoder model)， "encoded_layer" is the intermediate result
     decoded_layer = autoencoder.decoder(encoded_layer).numpy()       / decoded_layer: the reconstructed EEG data (the OUTPUT of the autoencoder model)
 
 ****
