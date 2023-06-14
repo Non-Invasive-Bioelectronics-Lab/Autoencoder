@@ -21,14 +21,14 @@ Statements and instructions:
    
 ****
 2. The trained Autoencoder Model is saved into "saved_model" folder, after downloading the folder, set up the correct directory, and then in Python, run the following code to load the model:
-
+****
     #%% Load Model from local directory
     autoencoder = tf.keras.models.load_model('saved_model/Autoencoder_CNN_model_v4')
     autoencoder.summary()
-
+****
     #%% Run the model by using your preprocessed EEG data
-    encoded_layer = autoencoder.encoder(x_test_noisy).numpy()        / x_test_noisy: your own preprocessed EEG data (the INPUT of the autoencoder model)， "encoded_layer" is the intermediate result
-    decoded_layer = autoencoder.decoder(encoded_layer).numpy()       / decoded_layer: the reconstructed EEG data (the OUTPUT of the autoencoder model)
+    encoded_layer = autoencoder.encoder(x_test_noisy).numpy()        // x_test_noisy: your own preprocessed EEG data (the INPUT of the autoencoder model)， "encoded_layer" is the intermediate result
+    decoded_layer = autoencoder.decoder(encoded_layer).numpy()       // decoded_layer: the reconstructed EEG data (the OUTPUT of the autoencoder model)
 
 ****
 3. The "autoencoderCNN_final.tflite" is the converted autoencoder model for mobile/edge devices, used for TensorFlow-Lite. The example code for using this in Android can be found in  
