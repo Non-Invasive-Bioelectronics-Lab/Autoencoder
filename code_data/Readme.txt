@@ -13,7 +13,7 @@ Autoencoder Training:
 
 The datasets here are the saved EOG, motion, EMG artifacts datasets after preprocessing. Note: The dataset provided here is before segmentation and normalization, etc.
 
-Dataset description:
+Dataset pre-processing description:
 
 EOG artifacts:
 1. EEG_clean_EOG_bp: raw dataset -> 1-50~Hz bandpass filtering -> cut out 2-seconds epochs in the begining and the end. 
