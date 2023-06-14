@@ -18,8 +18,8 @@ Statements:
    (3). EEG/EMG artifact dataset: is obtained from the 'EEGDenoiseNet' paper (DOI: https://iopscience.iop.org/article/10.1088/1741-2552/ac2bf8), data can be downloaded from GitHub: 
         https://github.com/ncclabsustech/EEGdenoiseNet
 ****
-   Based on these public EEG datasets, this work did appropriate signal pre-processing for the Autoencoder model development. The pre-processing details can be found in the "code_data" folder -> 
-   "Readme" file.
+   （Based on these public EEG datasets, this work did appropriate signal pre-processing for the Autoencoder model development. The pre-processing details can be found in the "code_data" folder -> "Readme" file.）
+   
 ****
 3. The trained Autoencoder Model is saved into "saved_model" folder, after downloading the folder, set up the correct directory, and then in Python, run the following code to load the model:
 ****
