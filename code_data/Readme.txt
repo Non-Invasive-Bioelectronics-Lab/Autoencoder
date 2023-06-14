@@ -1,9 +1,17 @@
 Autoencoder Training:
 
-'BigModel_v4.py' --- The Python script for training the Autoencoder for EEG artifact removal
+'BigModel_v4.py' --- The complete Python script for the autoencoder model development, it contains: 
+(1). EEG data loading;  
+(2). Data segmentation;  
+(3). Data normalization;  
+(4). EOG/motion/EMG artefact dataset integration and sorting (in the same order for ground-truth data and corrupted data);
+(5). Train/Validation/Test set split;
+(6). Model training;
+(7). Model Evaluation;
+(8). Saving model, loading model, converting model, saving results, plotting results, etc.
 
 
-The datasets here are the saved EOG, motion, EMG artifacts datasets after preprocessing
+The datasets here are the saved EOG, motion, EMG artifacts datasets after preprocessing. The dataset provided here is before segmentation and normalization, etc.
 Dataset description:
 
 EOG artifacts:
