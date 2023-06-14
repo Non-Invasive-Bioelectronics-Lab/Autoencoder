@@ -11,7 +11,8 @@ Autoencoder Training:
 (8). Saving model, loading model, converting model, saving results, plotting results, etc.
 
 
-The datasets here are the saved EOG, motion, EMG artifacts datasets after preprocessing. The dataset provided here is before segmentation and normalization, etc.
+The datasets here are the saved EOG, motion, EMG artifacts datasets after preprocessing. Note: The dataset provided here is before segmentation and normalization, etc.
+
 Dataset description:
 
 EOG artifacts:
