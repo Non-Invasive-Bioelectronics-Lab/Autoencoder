@@ -8,6 +8,7 @@ The Android Studio project is in "android_app" branch.
 
 
 Statements:
+****
 1. The EEG datasets used in this work are publicly available, and published by other researchers, the source of the dataset is provided below:
 
 (1). EEG/EOG artifact dataset: can be downloaded from: https://data.mendeley.com/datasets/wb6yvr725d/1; and the data usage instructions can be found in DOI:   https://www.sciencedirect.com/science/article/pii/S2352340916304000?via%3Dihub
@@ -20,11 +21,11 @@ Statements:
    
 ****
 2. The trained Autoencoder Model is saved into "saved_model" folder, after downloading the folder, set up the correct directory, and then in Python, run the following code to load the model:
-****
+
     #%% Load Model from local directory
     autoencoder = tf.keras.models.load_model('saved_model/Autoencoder_CNN_model_v4')
     autoencoder.summary()
-****
+
     #%% Run the model by using your preprocessed EEG data
     encoded_layer = autoencoder.encoder(x_test_noisy).numpy()        / x_test_noisy: your own preprocessed EEG data (the INPUT of the autoencoder model)， "encoded_layer" is the intermediate result
     decoded_layer = autoencoder.decoder(encoded_layer).numpy()       / decoded_layer: the reconstructed EEG data (the OUTPUT of the autoencoder model)
