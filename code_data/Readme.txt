@@ -13,16 +13,18 @@ Autoencoder Training:
 
 The datasets here are the saved EOG, motion, EMG artifacts datasets after preprocessing. Note: The dataset provided here is before segmentation and normalization, etc.
 
-Dataset pre-processing description:
+Dataset pre-processing description: 
+******（the pre-processing steps in the brackets below will be done in the 'BigModel_v4.py' Python script）******
+****** (EEG/Motion dataset has been filtered already, so don't need to do here) ******
 
 EOG artifacts:
-1. EEG_clean_EOG_bp: raw dataset -> 1-50~Hz bandpass filtering -> cut out 2-seconds epochs in the begining and the end. 
-2. EEG_noisy_EOG_bp: raw dataset -> no filtering -> cut out 2-seconds epochs in the begining and the end.
+1. EEG_clean_EOG_bp: raw dataset -> (1-50~Hz bandpass filtering -> cut out 2-seconds epochs in the begining and the end.) 
+2. EEG_noisy_EOG_bp: raw dataset -> (no filtering -> cut out 2-seconds epochs in the begining and the end.) 
 
 Motion artifacts:
 1. EEG_clean_motion_matlab: raw dataset -> detrend -> downsample to 200~Hz -> 1-50~Hz bandpass filtering -> cut out 5-seconds epochs in the begining and the end.
 2. EEG_noisy_motion_matlab: raw dataset -> detrend -> downsample to 200~Hz -> no filtering -> cut out 5-seconds epochs in the begining and the end.
 
 EMG artifacts:
-1. EEG_clean_EMG_bp: raw dataset -> 1-50~Hz bandpass filtering 
-2. EEG_noisy_EMG_bp: raw dataset -> no filtering 
+1. EEG_clean_EMG_bp: (raw dataset -> 1-50~Hz bandpass filtering) 
+2. EEG_noisy_EMG_bp: (raw dataset -> no filtering) 
