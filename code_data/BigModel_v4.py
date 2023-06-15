@@ -82,36 +82,35 @@ print("SNR min: ", min(SNRs), "SNR max: ", max(SNRs))
 #%%  bandpass filtering clean version data
 
 
-## Before this step, it's good to plot the data from the last step 
-## to double-check the signal is not filtered before, to avoid filtering twice
+## This block is to 1-50Hz bandpass filter the EEG/EOG, and EEG/EMG dataset, and begin/end deletion
+## The EEG/Motion dataset was filtered already, so don't need to filter here
+
+fs=200
+### bandpass filtering 
+def bandpass_filtering(data):
+    # Get nyquist frequency of signal
+    nyq = 0.5 * fs
+    # Find the normalised cut-off frequency
+    lowbound = 1/nyq  
+    highbound = 50/nyq
+    # Generate array of filter co-efficients
+    b, a = signal.butter(2, [lowbound, highbound], btype='bandpass', analog=False)
+    filtered_data = signal.filtfilt(b, a, data)
+    return filtered_data
 
 
-# fs=200
-# ### bandpass filtering 
-# def bandpass_filtering(data):
-#     # Get nyquist frequency of signal
-#     nyq = 0.5 * fs
-#     # Find the normalised cut-off frequency
-#     lowbound = 1/nyq  
-#     highbound = 50/nyq
-#     # Generate array of filter co-efficients
-#     b, a = signal.butter(2, [lowbound, highbound], btype='bandpass', analog=False)
-#     filtered_data = signal.filtfilt(b, a, data)
-#     return filtered_data
-
-
-# for i in range(len(EEG_clean_EOG)):
-#     if len(EEG_clean_EOG[i])>1:
-#         data = bandpass_filtering(EEG_clean_EOG[i])
-#         EEG_clean_EOG[i] = data[1*fs:len(data)-1*fs]
+ for i in range(len(EEG_clean_EOG)):
+     if len(EEG_clean_EOG[i])>1:
+         data = bandpass_filtering(EEG_clean_EOG[i])
+         EEG_clean_EOG[i] = data[1*fs:len(data)-1*fs]
         
-#         data_n = EEG_noisy_EOG[i]
-#         EEG_noisy_EOG[i] = data_n[1*fs:len(data_n)-1*fs]
+         data_n = EEG_noisy_EOG[i]
+         EEG_noisy_EOG[i] = data_n[1*fs:len(data_n)-1*fs]
         
 
-# for i in range(len(EEG_clean_EMG)):
-#     data = bandpass_filtering(EEG_clean_EMG[i])
-#     EEG_clean_EMG[i] = data
+ for i in range(len(EEG_clean_EMG)):
+     data = bandpass_filtering(EEG_clean_EMG[i])
+     EEG_clean_EMG[i] = data
    
 
 #%% Segmentation    
