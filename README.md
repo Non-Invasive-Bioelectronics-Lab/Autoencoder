@@ -25,7 +25,7 @@ Statements and instructions:
 For obtaining a better model performance, the input raw EEG data should be processed in the same as we did: resample EEG to 200~Hz, segment EEG into 4-second length, normalize the segment into (0,1) amplitude range, and then feed into the model. 
 ****
     #%% Load Model from local directory
-    autoencoder = tf.keras.models.load_model('saved_model/Autoencoder_CNN_model_v4')
+    autoencoder = tf.keras.models.load_model('path/Autoencoder_revision')
     autoencoder.summary()
 ****
     #%% Run the model by using your preprocessed EEG data
