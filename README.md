@@ -33,7 +33,7 @@ For obtaining a better model performance, the input raw EEG data should be proce
     decoded_layer = autoencoder.decoder(encoded_layer).numpy()       // decoded_layer: the reconstructed EEG data (the OUTPUT of the autoencoder model)
 
 ****
-3. The "autoencoderCNN_final.tflite" is the converted autoencoder model for mobile/edge devices, used for TensorFlow-Lite. The example code for using this in Android can be found in  
+3. The "autoencoder_revision.tflite" is the converted autoencoder model for mobile/edge devices, used for TensorFlow-Lite. The example code for using this in Android can be found in  
    "android_app" branch
 
    
