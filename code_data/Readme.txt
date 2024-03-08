@@ -1,3 +1,4 @@
+This folder show how we trained the model
 Autoencoder Training:
 
 'BigModel_v4.py' --- The complete Python script for the autoencoder model development, it contains: 
