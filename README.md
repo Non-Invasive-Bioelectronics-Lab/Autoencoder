@@ -20,7 +20,7 @@ Statements and instructions:
 （Based on these public EEG datasets, this work did appropriate signal pre-processing for the Autoencoder model development. The pre-processing details used for this work can be found in the "code_data" folder -> "Readme" file.）
    
 ****
-2. The trained Autoencoder Model is saved into "saved_model" folder, after downloading the folder, set up the correct directory, and then in Python, run the following code to load the model:
+2. The trained Autoencoder Model is saved into "run_model" folder, after downloading the folder, set up the correct directory, and then in Python, run the following code to load the model: example code is provided in the 'quantization_test.py' script.
   
 For obtaining a better model performance, the input raw EEG data should be processed in the same as we did: resample EEG to 200~Hz, segment EEG into 4-second length, normalize the segment into (0,1) amplitude range, and then feed into the model. 
 ****
