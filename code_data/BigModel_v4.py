@@ -115,6 +115,25 @@ print("SNR min: ", min(SNRs), "SNR max: ", max(SNRs))
    
 
 
+#%% high-pass filter the Noisy EMG dataset: Reviewer's comments
+fs=200
+### bandpass filtering 
+def highpass_filtering(data):
+    # Get nyquist frequency of signal
+    nyq = 0.5 * fs
+    # Find the normalised cut-off frequency
+    cutoff = 1/nyq  
+    # Generate array of filter co-efficients
+    b, a = signal.butter(2, cutoff, btype='highpass', analog=False)
+    filtered_data = signal.filtfilt(b, a, data)
+    return filtered_data
+
+
+
+for i in range(len(EEG_noisy_EMG)):
+    data = highpass_filtering(EEG_noisy_EMG[i])
+    EEG_noisy_EMG[i] = data
+    print(i)
 
 
 
@@ -512,7 +531,7 @@ cc_trainset = np.array(cc_trainset)
 plt.hist(cc_trainset)
 plt.show() 
 
-# when cc>0.9, we think it's originally artifact free
+# when cc>threshold, we think it's originally artifact free
 print(sum(k>0.95 for k in cc_trainset))
 
 #%% Count how many clean segments are included in the test set: x_test_noisy
@@ -529,13 +548,14 @@ cc_testset = np.array(cc_testset)
 plt.hist(cc_testset)
 plt.show() 
 
-# when cc>0.9, we think it's originally artifact free
+# when cc>0.95, we think it's originally artifact free
 print(sum(k>0.95 for k in cc_testset))
 
 
 #%% Count how many clean segments are included in the validation set: x_val_noisy
 import math
 import scipy.stats
+
 
 cc_valset = []
 for i in range(len(x_val_noisy)):
@@ -547,12 +567,18 @@ cc_valset = np.array(cc_valset)
 plt.hist(cc_valset)
 plt.show() 
 
-# when cc>0.9, we think it's originally artifact free
+# when cc>0.95, we think it's originally artifact free
 print(sum(k>0.95 for k in cc_valset))
 
 
 
+
 #%%
+import time
+# Record the start time
+start_time = time.time()
+
+
 ######  Define a convolutional Autoencoder
 class Autoencoder(Model):
   def __init__(self):
@@ -586,14 +612,11 @@ early_stopping =  EarlyStopping(monitor='val_loss',patience=pat, verbose=1)
 
 ########## save the model as a physical file
 # model_checkpoint = ModelCheckpoint('Autoencoder_model.h5', verbose=1, save_best_only=True)
-
-
 path_checkpoint = "training_1/cp.ckpt"
 directory_checkpoint = os.path.dirname(path_checkpoint)
 callback = tf.keras.callbacks.ModelCheckpoint(filepath=path_checkpoint,
                                                  save_weights_only=True,
                                                  verbose=1)
-
 
 
 Epochs = 1000
@@ -611,6 +634,16 @@ decoded_layer = autoencoder.decoder(encoded_layer).numpy()
 
 # squeeze from (1712, 800, 1) to (1712, 800)
 decoded_layer = np.squeeze(decoded_layer)
+
+
+
+# Record the end time
+end_time = time.time()
+
+# Calculate the elapsed time
+elapsed_time = end_time - start_time
+
+print(f"Elapsed time: {elapsed_time} seconds")
 
 
 
@@ -633,6 +666,7 @@ plt.ylabel('Accuracy')
 plt.title('Learning Curve - Accuracy') 
 plt.legend() 
 plt.tight_layout() 
+# plt.savefig('learning_curve.pdf')
 plt.show()
 
 
@@ -651,7 +685,7 @@ with open('history.pkl', 'wb') as file:
 
 # TensorFlow --- savedModel 
 # mkdir -p saved_model
-autoencoder.save('saved_model/Autoencoder_CNN_model_v4')
+autoencoder.save('saved_model/Autoencoder_revision')
 
 # Convert the model to TensorFlow Lite
 import tensorflow as tf
@@ -659,7 +693,7 @@ converter = tf.lite.TFLiteConverter.from_keras_model(autoencoder)
 tflite_model = converter.convert()
 
 # Save the model.  // filename is:'model.tflite'
-with open('model.tflite', 'wb') as f:
+with open('autoencoder_revision.tflite', 'wb') as f:
   f.write(tflite_model)
   
 
@@ -853,6 +887,10 @@ import math
 RRMSE_timeDomain = np.zeros(shape=(len(z_test_clean),1))
 for i in range(len(RRMSE_timeDomain)):
     RRMSE_timeDomain[i] = RRMSE(z_test_clean[i], z_decoded_layer[i])
+    # RRMSE_timeDomain[i] = RRMSE(z_test_clean[i].astype(np.int8), z_decoded_layer[i].astype(np.int8))
+    # RRMSE_timeDomain[i] = RRMSE(z_test_clean[i].astype(np.float16), z_decoded_layer[i].astype(np.float16))
+
+
 
 
 RRMSE_EOG = RRMSE_timeDomain[0:345]
@@ -927,8 +965,8 @@ print("CC:  mean= ", np.mean(CC_EMG), " ,std= ", np.std(CC_EMG))
 autoencoder = tf.keras.models.load_model('saved_model/Autoencoder_CNN_model_v4')
 autoencoder.summary()
 
-# encoded_layer = Autoencoder.encoder(x_test_noisy).numpy()
-# decoded_layer = Autoencoder.decoder(encoded_layer).numpy()
+encoded_layer = autoencoder.encoder(x_test_noisy).numpy()
+decoded_layer = autoencoder.decoder(encoded_layer).numpy()
 
 ### Load Saved Results
 x_test_noisy = np.load("x_test_noisy1.npy")
